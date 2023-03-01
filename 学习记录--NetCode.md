@@ -117,14 +117,14 @@ newPlayer.SpawnWithOwnership(clientId, true);
 ```
 # 角色信息的传递
 ```c#
-// guid不是guide，不是引导！！！！是网络连接的id
+// guid不是guide，不是引导！！！！是职业id
 // NetworkAvatarGuidState的作用根据guid初始化角色信息，因此它专门建了个asset配置AvatarRegistry，管理所有的角色配置
 /// <summary>
 /// NetworkBehaviour component to send/receive GUIDs from server to clients.
 /// </summary>
 public class NetworkAvatarGuidState : NetworkBehaviour
 {
-    //这个GUID会随机初始化，然后选角色的后更新
+    //这个GUID会随机初始化，选角色后更新
     [FormerlySerializedAs("AvatarGuidArray")]
     [HideInInspector]
     public NetworkVariable<NetworkGuid> AvatarGuid = new NetworkVariable<NetworkGuid>();
@@ -145,7 +145,7 @@ public class PersistentPlayer : NetworkBehaviour
     public NetworkNameState NetworkNameState => m_NetworkNameState;
     public NetworkAvatarGuidState NetworkAvatarGuidState => m_NetworkAvatarGuidState;
 }
-// 选角色完成的时候会把角色信息存进去，由此可见，这个persistentPlayer，就是用来玩家数据并传递的
+// 选角色完成的时候会把角色信息存进去，由此可见，这个persistentPlayer，就是用来存储玩家数据并传递的
 void SaveLobbyResults()
 {
     foreach (NetworkCharSelection.LobbyPlayerState playerInfo in networkCharSelectioLobbyPlayers)
@@ -240,14 +240,14 @@ void RegisterAvatar(Guid guid)
         serverCharacter.CharacterClass = avatar.CharacterClass;
     }
 }
-// 最终在组件ClientAvatarGuidHandler组件里创建了客户端能看到的模型
+// 最终在ClientAvatarGuidHandler组件里创建了客户端能看到的模型
 // 这个函数服务器不执行，毕竟服务器不需要跑渲染
 // spawn avatar graphics GameObject
 Instantiate(m_NetworkAvatarGuidState.RegisteredAvatar.Graphics, m_GraphicsAnimattransform);
 ```
 # 选角色
 ```c#
-// 选人界面的networkCharSelection.LobbyPlayers存放着所有玩家在服务器的实例，用来做选人的校验和同步
+// 选人界面的networkCharSelection.LobbyPlayers存放着玩家的选角信息，用来做选人的校验和同步
 private NetworkList<LobbyPlayerState> m_LobbyPlayers;
 // OnListChanged是NetworkList定义的一个委托，当玩家信息变化时触发事件，游戏接入处理了选角色时的UI响应
 // 具体的网络传输疑似被封装进INetworkUpdateSystem里面，VS不能调试进入
