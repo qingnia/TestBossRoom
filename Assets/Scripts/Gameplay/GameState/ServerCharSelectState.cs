@@ -134,9 +134,11 @@ namespace Unity.BossRoom.Gameplay.GameState
         /// </summary>
         void CloseLobbyIfReady()
         {
-            if (networkCharSelection.LobbyPlayers.Count < 5)
+            var settings = MyCustomSettings.GetSerializedSettings();
+            if (networkCharSelection.LobbyPlayers.Count < settings.FindProperty("m_MinPlayerNumber").intValue)
             {
-                //return;
+                Debug.LogError("player num limit, cur:" + networkCharSelection.LobbyPlayers.Count + ", limit:" + settings.FindProperty("m_MinPlayerNumber").intValue);
+                return;
             }
             foreach (NetworkCharSelection.LobbyPlayerState playerInfo in networkCharSelection.LobbyPlayers)
             {

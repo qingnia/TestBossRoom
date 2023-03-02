@@ -193,7 +193,9 @@ namespace Unity.BossRoom.Gameplay.GameState
             var pstr = (count > 1) ? "players" : "player";
             m_NumPlayersText.text = "<b>" + count + "</b> " + pstr + " connected";
 
-            m_NumPlayersCountText.text = "<b>" + count + "</b> / 5";
+
+            var settings = MyCustomSettings.GetSerializedSettings();
+            m_NumPlayersCountText.text = "<b>" + count + "</b> / " + settings.FindProperty("m_MinPlayerNumber").intValue;
         }
 
         /// <summary>
