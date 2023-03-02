@@ -134,6 +134,10 @@ namespace Unity.BossRoom.Gameplay.GameState
         /// </summary>
         void CloseLobbyIfReady()
         {
+            if (networkCharSelection.LobbyPlayers.Count < 5)
+            {
+                //return;
+            }
             foreach (NetworkCharSelection.LobbyPlayerState playerInfo in networkCharSelection.LobbyPlayers)
             {
                 if (playerInfo.SeatState != NetworkCharSelection.SeatState.LockedIn)

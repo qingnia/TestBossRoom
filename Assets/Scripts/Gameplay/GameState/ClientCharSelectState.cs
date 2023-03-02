@@ -57,6 +57,10 @@ namespace Unity.BossRoom.Gameplay.GameState
         TextMeshProUGUI m_NumPlayersText;
 
         [SerializeField]
+        [Tooltip("Text element containing player count which updates as players connect")]
+        TextMeshProUGUI m_NumPlayersCountText;
+
+        [SerializeField]
         [Tooltip("Text element for the Ready button")]
         TextMeshProUGUI m_ReadyButtonText;
 
@@ -188,6 +192,8 @@ namespace Unity.BossRoom.Gameplay.GameState
             int count = m_NetworkCharSelection.LobbyPlayers.Count;
             var pstr = (count > 1) ? "players" : "player";
             m_NumPlayersText.text = "<b>" + count + "</b> " + pstr + " connected";
+
+            m_NumPlayersCountText.text = "<b>" + count + "</b> / 5";
         }
 
         /// <summary>
