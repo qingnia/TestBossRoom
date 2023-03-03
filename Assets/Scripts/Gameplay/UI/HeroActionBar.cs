@@ -40,6 +40,8 @@ namespace Unity.BossRoom.Gameplay.UI
         /// </summary>
         ClientInputSender m_InputSender;
 
+        ServerCharacter m_serverCharacter;
+
         /// <summary>
         /// Identifiers for the buttons on the action bar.
         /// </summary>
@@ -144,6 +146,11 @@ namespace Unity.BossRoom.Gameplay.UI
                 GameDataSource.Instance.TryGetActionPrototypeByID(m_InputSender.actionState3.actionID, out action3);
             }
             UpdateActionButton(m_ButtonInfo[ActionButtonType.Special2], action3);
+
+            if (clientPlayerAvatar.TryGetComponent(out m_serverCharacter))
+            {
+                m_serverCharacter.ManaPoints.OnValueChanged += UpdateSkillButton;
+            }
         }
 
         void Action1ModifiedCallback()
@@ -161,6 +168,10 @@ namespace Unity.BossRoom.Gameplay.UI
             {
                 m_InputSender.action1ModifiedCallback -= Action1ModifiedCallback;
             }
+            if (m_serverCharacter)
+            {
+                m_serverCharacter.ManaPoints.OnValueChanged -= UpdateSkillButton;
+            }
             m_InputSender = null;
         }
 
@@ -176,6 +187,22 @@ namespace Unity.BossRoom.Gameplay.UI
 
             ClientPlayerAvatar.LocalClientSpawned += RegisterInputSender;
             ClientPlayerAvatar.LocalClientDespawned += DeregisterInputSender;
+        }
+
+        void UpdateSkillButton(int previousValue, int newValue)
+        {
+            foreach (ActionButtonInfo buttonInfo in m_ButtonInfo.Values)
+            {
+                if (buttonInfo.CurAction && buttonInfo.CurAction.Config.ManaCost > newValue)
+                {
+                    Debug.LogWarning("mana is too less to cast skill" + buttonInfo.CurAction.name);
+                    buttonInfo.Button.enabled = false;
+                }
+                else
+                {
+                    buttonInfo.Button.enabled = true;
+                }
+            }
         }
 
         void OnEnable()

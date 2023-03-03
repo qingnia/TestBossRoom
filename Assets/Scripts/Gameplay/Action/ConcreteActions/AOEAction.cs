@@ -23,6 +23,8 @@ namespace Unity.BossRoom.Gameplay.Actions
 
         public override bool OnStart(ServerCharacter serverCharacter)
         {
+            if (! base.CostMana(serverCharacter))
+                return ActionConclusion.Stop;
             float distanceAway = Vector3.Distance(serverCharacter.physicsWrapper.Transform.position, Data.Position);
             if (distanceAway > Config.Range + k_MaxDistanceDivergence)
             {

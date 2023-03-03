@@ -123,6 +123,16 @@ namespace Unity.BossRoom.Gameplay.Actions
             Cancel(serverCharacter);
         }
 
+        public virtual bool CostMana(ServerCharacter serverCharacter)
+        {
+            if (serverCharacter.ManaPoints.Value < Config.ManaCost)
+            {
+                return ActionConclusion.Stop;
+            }
+            serverCharacter.ManaPoints.Value -= Config.ManaCost;
+            return true;
+        }
+
         /// <summary>
         /// This will get called when the Action gets canceled. The Action should clean up any ongoing effects at this point.
         /// (e.g. an Action that involves moving should cancel the current active move).

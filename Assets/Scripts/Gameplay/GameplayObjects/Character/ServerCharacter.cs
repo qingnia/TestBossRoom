@@ -62,6 +62,11 @@ namespace Unity.BossRoom.Gameplay.GameplayObjects.Character
         /// </summary>
         public NetworkVariable<ulong> TargetId { get; } = new NetworkVariable<ulong>();
 
+
+        // 扩展角色的法力值
+        [HideInInspector]
+        public NetworkVariable<int> ManaPoints = new NetworkVariable<int>();
+
         /// <summary>
         /// Current HP. This value is populated at startup time from CharacterClass data.
         /// </summary>
@@ -240,6 +245,8 @@ namespace Unity.BossRoom.Gameplay.GameplayObjects.Character
         void InitializeHitPoints()
         {
             HitPoints = CharacterClass.BaseHP.Value;
+
+            ManaPoints.Value = CharacterClass.BaseMana;
 
             if (!IsNpc)
             {
