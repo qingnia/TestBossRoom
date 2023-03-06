@@ -18,7 +18,7 @@ namespace Interaction
             {
                 Debug.Log("handler add Mp, " + go.name + ", add:" + addHpNum);
                 // actually deal the damage
-                damage.ReceiveHP(target.GetComponent<ServerCharacter>(), addHpNum);
+                damage.ReceiveHP(interacter.GetComponent<ServerCharacter>(), addHpNum);
             }
         }
     }

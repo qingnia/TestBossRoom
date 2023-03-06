@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 5095720399169022677}
   - component: {fileID: 5323538646401729986}
   - component: {fileID: 8300914465446921060}
-  - component: {fileID: 6799368387788120829}
   - component: {fileID: 4844894222337408318}
+  - component: {fileID: 6799368387788120829}
+  - component: {fileID: 9192469513376304254}
   m_Layer: 6
   m_Name: ManaStone
   m_TagString: Untagged
@@ -113,7 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70135e56ea4c62447905640252c20cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BaseHandlers: []
+  m_BaseHandlers:
+  - {fileID: 9192469513376304254}
 --- !u!114 &8300914465446921060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,21 +132,6 @@ MonoBehaviour:
   - {fileID: 4844894222337408318}
   - {fileID: 6799368387788120829}
   triggerOnce: 0
---- !u!114 &6799368387788120829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2685644790616901676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19930c7d70299c9469a0d910442ec76a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetType: 1
-  handlerPot: 0
-  addManaNum: 2
 --- !u!114 &4844894222337408318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +147,39 @@ MonoBehaviour:
   targetType: 0
   handlerPot: 0
   addHpNum: -10
+--- !u!114 &6799368387788120829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2685644790616901676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19930c7d70299c9469a0d910442ec76a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 1
+  handlerPot: 0
+  addManaNum: 2
+--- !u!114 &9192469513376304254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2685644790616901676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ededb2d9421729449a1338b2c1f00a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 0
+  handlerPot: 0
+  sencondSpeed: 5
+  m_BaseHandlers:
+  - {fileID: 4844894222337408318}
+  - {fileID: 6799368387788120829}
 --- !u!1001 &1209212569242922923
 PrefabInstance:
   m_ObjectHideFlags: 0

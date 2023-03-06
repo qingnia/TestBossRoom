@@ -30,13 +30,13 @@ namespace Interaction
         //    }
         //}
 
-        protected virtual void TriggerInteraction(GameObject from, GameObject target)
+        protected virtual void TriggerInteraction(GameObject self, GameObject interacter)
         {
             foreach(BaseHandler handler in m_BaseHandlers)
             {
                 // todo: 点击事件是客户端触发，碰撞既可以客户端又可以服务器，场景事件只能是服务器
                 // 所以要处理事件的同步，如果触发效果没有需要在另一端执行的，就不同步，否则就要同步过去执行
-                handler.HandlerInit(from, target);
+                handler.HandlerInit(self, interacter);
             }
         }
     }

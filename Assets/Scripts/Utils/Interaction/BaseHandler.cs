@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -11,8 +12,8 @@ namespace Interaction
     }
     public enum TargetType
     {
-        From,
-        Target
+        Self,
+        Interacter
     }
 
     public abstract class BaseHandler : NetworkBehaviour
@@ -22,13 +23,15 @@ namespace Interaction
         [SerializeField]
         public HandlerPot handlerPot;
 
-        protected GameObject from;
-        protected GameObject target;
+        private List<BaseHandler> m_BaseHandlers;
 
-        protected virtual void Init(GameObject from, GameObject target)
+        protected GameObject self;
+        protected GameObject interacter;
+
+        protected virtual void Init(GameObject self, GameObject interacter)
         {
-            this.from = from;
-            this.target = target;
+            this.self = self;
+            this.interacter = interacter;
         }
 
         protected virtual bool CanHanler()
@@ -39,22 +42,32 @@ namespace Interaction
             }
             return false;
         }
+        protected virtual void HandlerEnd()
+        {
+            if (m_BaseHandlers != null)
+            {
+                foreach (BaseHandler handler in m_BaseHandlers)
+                {
+                    handler.HandlerInit(self, interacter);
+                }
+            }
+        }
 
         protected virtual GameObject GetObj()
         {
-            if (targetType == TargetType.From)
+            if (targetType == TargetType.Self)
             {
-                return from;
+                return self;
             }
             else
             {
-                return target;
+                return interacter;
             }
         }
         protected abstract void Excute();
-        public void HandlerInit(GameObject from, GameObject target)
+        public void HandlerInit(GameObject self, GameObject interacter)
         {
-            Init(from, target);
+            Init(self, interacter);
             Excute();
         }
     }
