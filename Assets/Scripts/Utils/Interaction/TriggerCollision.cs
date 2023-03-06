@@ -4,22 +4,23 @@ namespace Interaction
 {
     public class TriggerCollision : BaseTrigger
     {
+        private void Start()
+        {
+            if (IsClient)
+            {
+                //gameObject.GetComponent<Collider>().enabled = false;
+            }
+        }
+
         [SerializeField]
-        Collider m_Collider;
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
+        private bool triggerOnce = false;
         private void OnTriggerEnter(Collider other)
         {
+            if (triggerOnce)
+            {
+                gameObject.GetComponent<Collider>().enabled = false;
+            }
+
             Debug.LogWarning("trigger enter");
             TriggerInteraction(gameObject, other.gameObject);
         }

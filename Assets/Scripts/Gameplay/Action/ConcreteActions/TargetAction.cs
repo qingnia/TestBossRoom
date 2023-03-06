@@ -2,6 +2,7 @@ using System;
 using Unity.BossRoom.Gameplay.GameplayObjects.Character;
 using Unity.Netcode;
 using UnityEngine;
+using Interaction;
 
 namespace Unity.BossRoom.Gameplay.Actions
 {
@@ -28,6 +29,15 @@ namespace Unity.BossRoom.Gameplay.Actions
             serverCharacter.TargetId.Value = TargetId;
 
             FaceTarget(serverCharacter, TargetId);
+
+            // 点击交互
+            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(serverCharacter.TargetId.Value, out var targetObject))
+            {
+                if (targetObject.TryGetComponent(out TriggerClick triggerClick))
+                {
+                    triggerClick.OnTriggerClick(serverCharacter.gameObject);
+                }
+            }
 
             return true;
         }
