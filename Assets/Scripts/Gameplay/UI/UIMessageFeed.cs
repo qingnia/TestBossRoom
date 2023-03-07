@@ -5,6 +5,7 @@ using Unity.BossRoom.Gameplay.GameplayObjects;
 using Unity.BossRoom.Gameplay.GameplayObjects.Character;
 using Unity.BossRoom.Gameplay.Messages;
 using Unity.BossRoom.Infrastructure;
+using Unity.BossRoom.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -34,7 +35,8 @@ namespace Unity.BossRoom.Gameplay.UI
 #endif
             ISubscriber<DoorStateChangedEventMessage> doorStateChangedSubscriber,
             ISubscriber<ConnectionEventMessage> connectionEventSubscriber,
-            ISubscriber<LifeStateChangedEventMessage> lifeStateChangedEventSubscriber
+            ISubscriber<LifeStateChangedEventMessage> lifeStateChangedEventSubscriber,
+            ISubscriber<CommonChatMessage> CommonChatEventSubscriber
         )
         {
             m_Subscriptions = new DisposableGroup();
@@ -44,6 +46,7 @@ namespace Unity.BossRoom.Gameplay.UI
             m_Subscriptions.Add(doorStateChangedSubscriber.Subscribe(OnDoorStateChangedEvent));
             m_Subscriptions.Add(connectionEventSubscriber.Subscribe(OnConnectionEvent));
             m_Subscriptions.Add(lifeStateChangedEventSubscriber.Subscribe(OnLifeStateChangedEvent));
+            m_Subscriptions.Add(CommonChatEventSubscriber.Subscribe(OnChatMessageEvent));
         }
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
@@ -56,6 +59,10 @@ namespace Unity.BossRoom.Gameplay.UI
         void OnDoorStateChangedEvent(DoorStateChangedEventMessage eventMessage)
         {
             DisplayMessage(eventMessage.IsDoorOpen ? "The Door has been opened!" : "The Door is closing.");
+        }
+        void OnChatMessageEvent(CommonChatMessage eventMessage)
+        {
+            DisplayMessage(eventMessage.CharacterName + "says: " + eventMessage.message);
         }
 
         void OnConnectionEvent(ConnectionEventMessage eventMessage)

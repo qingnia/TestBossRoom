@@ -2,10 +2,12 @@
     "name": "Unity.BossRoom.Utils",
     "rootNamespace": "",
     "references": [
+        "Unity.BossRoom.Infrastructure",
         "Unity.TextMeshPro",
         "Unity.Netcode.Runtime",
         "Unity.Networking.Transport",
-        "Unity.Collections"
+        "Unity.Collections",
+        "VContainer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
