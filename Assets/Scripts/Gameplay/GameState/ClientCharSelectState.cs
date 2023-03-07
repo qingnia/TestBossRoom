@@ -8,6 +8,8 @@ using Unity.Netcode;
 using UnityEngine;
 using VContainer;
 using Avatar = Unity.BossRoom.Gameplay.Configuration.Avatar;
+using VContainer.Unity;
+using Unity.BossRoom.Utils;
 
 namespace Unity.BossRoom.Gameplay.GameState
 {
@@ -132,6 +134,11 @@ namespace Unity.BossRoom.Gameplay.GameState
                 { LobbyMode.LobbyEnding, m_UIElementsForLobbyEnding },
                 { LobbyMode.FatalError, m_UIElementsForFatalError },
             };
+        }
+
+        protected override void Configure(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<ChatPanelClass>();
         }
 
         protected override void OnDestroy()

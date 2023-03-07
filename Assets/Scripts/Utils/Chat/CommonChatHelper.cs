@@ -12,20 +12,18 @@ namespace Unity.BossRoom.Utils
         [Inject]
         IPublisher<CommonChatMessage> m_ChatPublisher;
 
-        private TMP_InputField inputBox;
-        private Button sendButton;
-        // Start is called before the first frame update
-        void Start()
+        public TMP_InputField inputBox;
+        public Button sendButton;
+
+        private void Awake()
         {
-            inputBox = GameObject.Find("CharacterSelectCanvas/Chat/Input").GetComponent<TMP_InputField>();
-            sendButton = GameObject.Find("CharacterSelectCanvas/Chat/Send").GetComponent<Button>();
             sendButton.onClick.AddListener(ClickSendButton);
         }
-
-        // Update is called once per frame
-        void Update()
+        [Inject]
+        public void Constructor(ChatPanelClass injectChatPanel)
         {
-
+            sendButton = injectChatPanel.GetComponentInChildren<Button>();
+            inputBox = injectChatPanel.GetComponentInChildren<TMP_InputField>();
         }
 
         public void ClickSendButton()

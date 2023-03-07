@@ -529,6 +529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3595191639318247936}
+  - component: {fileID: 38439632892427661}
   m_Layer: 5
   m_Name: Chat
   m_TagString: Untagged
@@ -558,6 +559,20 @@ RectTransform:
   m_AnchoredPosition: {x: 14, y: 16}
   m_SizeDelta: {x: 517.447, y: 78.635}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &38439632892427661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7564338870739652396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d763473c8822746a1738be23d39aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputBox: {fileID: 0}
+  sendButton: {fileID: 0}
 --- !u!1 &7989477313557799031
 GameObject:
   m_ObjectHideFlags: 0
