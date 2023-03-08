@@ -12,7 +12,9 @@ namespace Unity.BossRoom.Utils
         [Inject]
         IPublisher<CommonChatMessage> m_ChatPublisher;
 
+        [HideInInspector]
         public TMP_InputField inputBox;
+        [HideInInspector]
         public Button sendButton;
 
         private void Awake()
