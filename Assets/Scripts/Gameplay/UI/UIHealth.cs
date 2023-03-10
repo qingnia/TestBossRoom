@@ -35,7 +35,10 @@ namespace Unity.BossRoom.Gameplay.UI
 
         void OnDestroy()
         {
-            m_NetworkedHealth.OnValueChanged -= HealthChanged;
+            if (m_NetworkedHealth != null)
+            {
+                m_NetworkedHealth.OnValueChanged -= HealthChanged;
+            }
         }
     }
 }

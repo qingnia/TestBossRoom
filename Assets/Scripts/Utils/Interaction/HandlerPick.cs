@@ -8,7 +8,7 @@ namespace Interaction
         [SerializeField]
         private int sencondSpeed;
         [SerializeField]
-        private List<BaseHandler> m_BaseHandlers;
+        private List<BaseHandler> nextBaseHandlers;
 
         private bool canFly = false;
         // Start is called before the first frame update
